@@ -1,0 +1,20 @@
+version: "3.0"
+services:
+  my_service:
+          build : .
+          image: rojasree/host-to-s3-backup
+          container_name: s3uploader
+          environment:
+                - AWS_ACCESS_KEY_ID=AKIAXZ4LQHIIV5YN6KNS
+                - AWS_SECRET_ACCESS_KEY=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
+                - S3_BUCKET_URL=s3://s3upload-docker/
+                - AWS_DEFAULT_REGION=us-east-1
+                - CRON_SCHEDULE=1 * * * * # run every hour
+                - BACKUP_NAME=roja_backup
+          volumes:
+                - /home/ubuntu/docker2s3backup/data:/data:ro #use ro to make sure the volume gets mounted read-only
+          restart: always
+
+
+
+
